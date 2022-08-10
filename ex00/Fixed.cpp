@@ -4,17 +4,22 @@
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-Fixed::Fixed(): _val(0)
+Fixed::Fixed(): _fpvalue(0)
 {
 	std::cout << "Default constructor called." << std::endl;
 }
 
 Fixed::Fixed( const Fixed & AlreadyExistingObject )
 {
-	std::cout << "A copy constructor is called." << std::endl;
-	this->_val = AlreadyExistingObject._val;
-}
 
+	std::cout << "Copy constructor is called." << std::endl;
+	*this = AlreadyExistingObject;
+}
+/*
+A copy constructor is a member function that initializes an object using another object of the same class.
+Copy constructor is used to initialize the members of a newly created object by copying the members of an already existing object.
+copy initialization
+*/
 
 /*
 ** -------------------------------- DESTRUCTOR --------------------------------
@@ -22,7 +27,7 @@ Fixed::Fixed( const Fixed & AlreadyExistingObject )
 
 Fixed::~Fixed()
 {
-	std::cout << "A destructor is called." << std::endl;
+	std::cout << "Destructor is called." << std::endl;
 }
 
 
@@ -32,13 +37,14 @@ Fixed::~Fixed()
 
 Fixed &				Fixed::operator=( Fixed const & rhs )
 {
-	std::cout << "A copy assignment operator is called." << std::endl;
-	if (this == &rhs){
-		return *this;
-	}
+	std::cout << "Copy assignment operator is called." << std::endl;
+	this->_fpvalue = rhs.getRawBits();
 	return *this;
 }
-//das verstehe ich noch nicht!
+/*
+A copy assignment overload
+This operator is called when an already initialized object is assigned a new value from another existing object. 
+*/
 
 // std::ostream &			operator<<( std::ostream & o, Fixed const & i )
 // {
@@ -59,13 +65,13 @@ Fixed &				Fixed::operator=( Fixed const & rhs )
 int	Fixed::getRawBits( void ) const{
 
 	std::cout << "getRawBits member function called" << std::endl;
-	return (this->_val);
+	return (this->_fpvalue);
 }
 
 int	Fixed::setRawBits( int const raw ){
 
-	this->_val = raw;
-	return (this->_val);
+	this->_fpvalue = raw;
+	return (this->_fpvalue);
 }
 
 /* ************************************************************************** */
