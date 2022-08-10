@@ -8,6 +8,7 @@ Fixed::Fixed(): _fpvalue(0)
 {
 	std::cout << "Default constructor called." << std::endl;
 }
+//somehow you have to initilize _bits to 8 here
 
 Fixed::Fixed( const Fixed & AlreadyExistingObject )
 {
