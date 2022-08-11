@@ -6,7 +6,7 @@
 /*   By: rschleic <rschleic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 18:16:47 by rschleic          #+#    #+#             */
-/*   Updated: 2022/08/11 13:40:01 by rschleic         ###   ########.fr       */
+/*   Updated: 2022/08/11 16:53:06 by rschleic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FIXED_HPP
 
 # include <iostream>
+# include <cmath>
 
 class Fixed
 {
@@ -22,17 +23,22 @@ class Fixed
 
 		Fixed();
 		Fixed( Fixed const & AlreadyExistingObject );
+		Fixed( int const i);
+		Fixed( float const f);
 		~Fixed();
-
 		Fixed &		operator=( Fixed const & rhs );
-		int	getRawBits( void ) const;
+		int		getRawBits( void ) const;
 		void	setRawBits ( int const raw );
+		float	toFloat( void ) const;
+		int		toInt( void ) const;
+		
 		
 	private:
 	
-		int _fpvalue;
-		static const int _bits;
-		//was bringt hier static? bleibt doch sowieso die ganze zeit im Programm?
+		int _fpvalue;//bits
+		static const int _bits;//fraction
+		//value that will be the same for the whole runtime so static const!
+		//has to be initialised in the source file though 
 
 };
 
