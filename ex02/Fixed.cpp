@@ -17,7 +17,7 @@ Fixed::Fixed(): _fpvalue(0)
 }
 //somehow you have to initilize _bits to 8 here
 
-Fixed::Fixed( const Fixed & AlreadyExistingObject )
+Fixed::Fixed( Fixed const& AlreadyExistingObject )
 {
 
 	std::cout << "Copy constructor is called." << std::endl;
@@ -58,12 +58,13 @@ Fixed::~Fixed()
 ** --------------------------------- OVERLOAD ---------------------------------
 */
 
-Fixed &				Fixed::operator=( Fixed const & rhs )
+Fixed&			Fixed::operator=( Fixed const& rhs )
 {
 	std::cout << "Copy assignment operator is called." << std::endl;
 	if (this == &rhs)
 		return (*this);//check if they are already the same aka self-assignment
-	this->_fpvalue = rhs.getRawBits();
+	// this->_fpvalue = rhs.getRawBits();
+	//brauche ich hier vlt nicht
 	return (*this);
 }
 /*
@@ -71,12 +72,82 @@ A copy assignment overload
 This operator is called when an already initialized object is assigned a new value from another existing object. 
 */
 
-std::ostream &			operator<<( std::ostream & o, Fixed const & i )
-{
-	o << " floating-point representation = " << i.toFloat();
-	return o;
+bool	Fixed::operator>( Fixed const& rhs ) const{
+
+	return (this->toFloat() > rhs.toFloat());
 }
 
+bool	Fixed::operator<( Fixed const& rhs ) const{
+
+	return (this->toFloat() < rhs.toFloat());
+}
+
+bool	Fixed::operator>=( Fixed const& rhs ) const{
+
+	return (this->toFloat() >= rhs.toFloat());
+}
+
+bool	Fixed::operator<=( Fixed const& rhs ) const{
+
+	return (this->toFloat() <= rhs.toFloat());
+}
+
+bool	Fixed::operator==( Fixed const& rhs ) const{
+
+	return (this->toFloat() == rhs.toFloat());
+}
+
+bool	Fixed::operator!=( Fixed const& rhs ) const{
+
+	return (this->toFloat() != rhs.toFloat());
+}
+
+Fixed	Fixed::operator+( Fixed const& rhs ) const{
+
+	return Fixed(this->toFloat() + rhs.toFloat());
+}
+
+Fixed	Fixed::operator-( Fixed const& rhs ) const{
+
+	return Fixed(this->toFloat() - rhs.toFloat());
+}
+
+Fixed	Fixed::operator*( Fixed const& rhs ) const{
+
+	return Fixed(this->toFloat() * rhs.toFloat());
+}
+
+Fixed	Fixed::operator/( Fixed const& rhs ) const{
+
+	return Fixed(this->toFloat() / rhs.toFloat());
+}
+
+Fixed&	Fixed::operator++(){
+
+	this->_fpvalue++;
+	return *this;
+}
+
+Fixed&	Fixed::operator--(){
+
+	this->_fpvalue--;
+	return *this;
+}
+//TODO:checks noch ned
+
+Fixed	Fixed::operator++(int){
+
+	Fixed tmp(*this);
+	this->operator++();
+	return (tmp);
+}//post
+
+Fixed	Fixed::operator--(int){
+
+	Fixed tmp(*this);
+	this->operator--();
+	return (tmp);
+}
 
 /*
 ** --------------------------------- METHODS ----------------------------------
@@ -97,6 +168,44 @@ int		Fixed::toInt( void ) const{
 }
 //verstanden
 
+Fixed&	Fixed::min( Fixed &lhs, Fixed& rhs ){
+
+	if (lhs < rhs)
+		return lhs;
+	else
+		return rhs;
+}
+
+Fixed const&	Fixed::min( Fixed const&lhs, Fixed const& rhs ){
+
+	if (lhs < rhs)
+		return lhs;
+	else
+		return rhs;
+}
+//TODO:sieht ganz anders aus als manus...
+
+Fixed&	Fixed::max( Fixed &lhs, Fixed& rhs ){
+
+	if (lhs > rhs)
+		return lhs;
+	else
+		return rhs;
+}
+
+Fixed const&	Fixed::max( Fixed const&lhs, Fixed const& rhs ){
+
+	if (lhs > rhs)
+		return lhs;
+	else
+		return rhs;
+}
+//TODO:sieht ganz anders aus als manus...
+//TODO:was soll man hier lernen, bzw worin bestehtd er unsterschied
+
+
+
+
 /*
 ** --------------------------------- ACCESSOR ---------------------------------
 */
@@ -113,3 +222,10 @@ void	Fixed::setRawBits( int const raw ){
 }
 
 /* ************************************************************************** */
+
+
+std::ostream&	operator<<( std::ostream& o, Fixed const& i )
+{
+	o << " floating-point representation = " << i.toFloat();
+	return o;
+}//muessen non member functions ans ende vom file?
