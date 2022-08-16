@@ -3,3 +3,4 @@ ocf
 fixedpointValue
 overload
 *.dSYM
+.gitignore
