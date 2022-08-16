@@ -15,7 +15,6 @@ Fixed::Fixed(): _fpvalue(0)
 {
 	std::cout << "Default constructor called." << std::endl;
 }
-//somehow you have to initilize _bits to 8 here
 
 Fixed::Fixed( const Fixed & AlreadyExistingObject )
 {
@@ -28,6 +27,7 @@ A copy constructor is a member function that initializes an object using another
 Copy constructor is used to initialize the members of a newly created object by copying the members of an already existing object.
 copy initialization
 */
+
 Fixed::Fixed( int const i ){
 
 	std::cout << "Int constructor is called." << std::endl;
@@ -35,7 +35,6 @@ Fixed::Fixed( int const i ){
 	//It converts _value to the corresponding fixed-point value
 	//shifts 8 bits to the left aka creating a fixed point 32 -> 24.8
 }
-//verstanden
 
 Fixed::Fixed( float const f ){
 
@@ -52,7 +51,6 @@ Fixed::~Fixed()
 {
 	std::cout << "Destructor is called." << std::endl;
 }
-
 
 /*
 ** --------------------------------- OVERLOAD ---------------------------------
@@ -71,23 +69,17 @@ A copy assignment overload
 This operator is called when an already initialized object is assigned a new value from another existing object. 
 */
 
-std::ostream &			operator<<( std::ostream & o, Fixed const & i )
-{
-	o << " floating-point representation = " << i.toFloat();
-	return o;
-}
-
 
 /*
 ** --------------------------------- METHODS ----------------------------------
 */
+
 float	Fixed::toFloat( void ) const{
 
 	return ((float) this->_fpvalue / (1 << this->_bits));
 	//that converts the fixed-point value to a floating-point value
 	// _val to float
 }
-//nicht verstanden
 
 int		Fixed::toInt( void ) const{
 
@@ -95,7 +87,6 @@ int		Fixed::toInt( void ) const{
 	//that converts the fixed-point value back to an integer value.
 	//shifts back 8 bits to the right 24.8 -> 32
 }
-//verstanden
 
 /*
 ** --------------------------------- ACCESSOR ---------------------------------
@@ -103,13 +94,20 @@ int		Fixed::toInt( void ) const{
 
 int	Fixed::getRawBits( void ) const{
 
-	std::cout << "getRawBits member function called" << std::endl;
+	// std::cout << "getRawBits member function called" << std::endl;
 	return (this->_fpvalue);
 }
 
 void	Fixed::setRawBits( int const raw ){
 
 	this->_fpvalue = raw;
+}
+
+
+std::ostream &			operator<<( std::ostream & o, Fixed const & i )
+{
+	o << " floating-point representation = " << i.toFloat();
+	return o;
 }
 
 /* ************************************************************************** */

@@ -7,12 +7,10 @@
 const int	Fixed::_bits = 8;
 
 
-
 Fixed::Fixed(): _fpvalue(0)
 {
 	std::cout << "Default constructor called." << std::endl;
 }
-//somehow you have to initilize _bits to 8 here
 
 Fixed::Fixed( const Fixed & AlreadyExistingObject )
 {
@@ -20,6 +18,7 @@ Fixed::Fixed( const Fixed & AlreadyExistingObject )
 	std::cout << "Copy constructor is called." << std::endl;
 	*this = AlreadyExistingObject;
 }
+
 /*
 A copy constructor is a member function that initializes an object using another object of the same class.
 Copy constructor is used to initialize the members of a newly created object by copying the members of an already existing object.
@@ -34,7 +33,6 @@ Fixed::~Fixed()
 {
 	std::cout << "Destructor is called." << std::endl;
 }
-
 
 /*
 ** --------------------------------- OVERLOAD ---------------------------------
@@ -52,16 +50,6 @@ Fixed &				Fixed::operator=( Fixed const & rhs )
 A copy assignment overload
 This operator is called when an already initialized object is assigned a new value from another existing object. 
 */
-
-// std::ostream &			operator<<( std::ostream & o, Fixed const & i )
-// {
-// 	//o << "Value = " << i.getValue();
-// 	return o;
-// }
-/*
-to print out the class in string format
-*/
-
 
 /*
 ** --------------------------------- METHODS ----------------------------------

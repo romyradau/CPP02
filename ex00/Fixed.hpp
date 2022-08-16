@@ -6,7 +6,7 @@
 /*   By: rschleic <rschleic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 18:16:47 by rschleic          #+#    #+#             */
-/*   Updated: 2022/08/11 13:40:01 by rschleic         ###   ########.fr       */
+/*   Updated: 2022/08/16 19:26:30 by rschleic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ class Fixed
 	
 		int _fpvalue;
 		static const int _bits;
-		//was bringt hier static? bleibt doch sowieso die ganze zeit im Programm?
-
 };
 
 std::ostream &			operator<<( std::ostream & o, Fixed const & i );

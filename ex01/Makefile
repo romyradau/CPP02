@@ -9,7 +9,6 @@ FLAGS += -g
 SRC = main.cpp Fixed.cpp
 
 
-
 all: $(NAME)
 
 $(NAME): $(SRC)

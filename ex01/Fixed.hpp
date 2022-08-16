@@ -35,10 +35,9 @@ class Fixed
 		
 	private:
 	
-		int _fpvalue;//bits
-		static const int _bits;//fraction
-		//value that will be the same for the whole runtime so static const!
-		//has to be initialised in the source file though 
+		int _fpvalue;
+		static const int _bits;
+
 
 };
 
